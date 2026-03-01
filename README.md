@@ -20,6 +20,70 @@ The agent:
 
 The task succeeds when all citations are verified and the report meets defined constraints within a maximum number of iterations.
 
+# Inputs
+
+-User prompt (report topic)
+
+-Local document corpus (docs/)
+
+-Optional metadata (titles, tags)
+
+# Actions
+
+The agent can:
+
+-Search documents
+
+-Extract candidate quotes
+
+-Generate report sections
+
+-Verify citations against source documents
+
+-Revise the report if verification fails
+
+# Environment Dynamics
+
+-Each tool call updates the internal state:
+
+-Retrieval updates the evidence pool
+
+-Draft generation updates the report structure
+
+-Verification produces pass/fail feedback
+
+-Revision modifies plan and draft
+
+# Success Criteria
+
+The workflow succeeds if:
+
+-The report answers the prompt
+
+-Each claim contains at least one citation
+
+-All citations are verified
+
+-Maximum iteration limit is not exceeded
+
+# Failure Criteria
+
+-Unverified citations remain
+
+-Maximum iterations reached
+
+-Insufficient evidence found
+
+#Constraints
+
+-Maximum 8 iterations
+
+-Only local documents allowed
+
+-No external web search
+
+-All decisions logged
+
 # Architecture
 The system follows an explicit agent loop:
 
@@ -30,7 +94,30 @@ State, tool calls, validation results, and iteration steps are logged.
 # Baseline
 We compare the agentic workflow to a single-prompt baseline without iterative validation.
 
+# Evaluation
+
+We evaluate the workflow using:
+
+-Citation accuracy (% verified citations)
+
+-Success rate across N prompts
+
+-Average number of iterations
+
+-Execution time per run
+
+We compare:
+
+1.Single-prompt baseline (no tools, no validation)
+
+2.Agentic workflow (planning + tools + verification loop)
+
 # How to Run
 pip install -r requirements.txt
 
-python src/agent.py
+Place documents inside /docs
+
+Create a .env file based on .env.example
+
+Run:
+python src/agent_runner.py --prompt "Your topic here"
