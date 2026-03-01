@@ -9,9 +9,13 @@ The goal is to generate a report about a given topic using only locally stored d
 The agent:
 
 -Searches documents
+
 -Extracts candidate quotes
+
 -Generates a report
+
 -Verifies that all quotes exist in the source documents
+
 -Iterates if verification fails
 
 The task succeeds when all citations are verified and the report meets defined constraints within a maximum number of iterations.
