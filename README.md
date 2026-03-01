@@ -1,8 +1,8 @@
 # agentic-report-workflow
 Agentic workflow system that generates and verifies document based reports using iterative planning, tool use, and validation.
 # Overview
-This project implements an agentic workflow that generates structured reports from local documents. T
-he system uses iterative planning, tool calls, validation, and recovery to ensure that all citations in the report are grounded in source documents.
+This project implements an agentic workflow that generates structured reports from local documents. 
+The system uses iterative planning, tool calls, validation, and recovery to ensure that all citations in the report are grounded in source documents.
 
 # Task Definition
 The goal is to generate a report about a given topic using only locally stored documents.
