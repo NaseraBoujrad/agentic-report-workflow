@@ -10,79 +10,79 @@ The agent:
 
 - Searches documents
 
--Extracts candidate quotes
+- Extracts candidate quotes
 
--Generates a report
+- Generates a report
 
--Verifies that all quotes exist in the source documents
+- Verifies that all quotes exist in the source documents
 
--Iterates if verification fails
+- Iterates if verification fails
 
 The task succeeds when all citations are verified and the report meets defined constraints within a maximum number of iterations.
 
 # Inputs
 
--User prompt (report topic)
+- User prompt (report topic)
 
--Local document corpus (docs/)
+- Local document corpus (docs/)
 
--Optional metadata (titles, tags)
+- Optional metadata (titles, tags)
 
 # Actions
 
 The agent can:
 
--Search documents
+- Search documents
 
--Extract candidate quotes
+- Extract candidate quotes
 
--Generate report sections
+- Generate report sections
 
--Verify citations against source documents
+- Verify citations against source documents
 
--Revise the report if verification fails
+- Revise the report if verification fails
 
 # Environment Dynamics
 
--Each tool call updates the internal state:
+- Each tool call updates the internal state:
 
--Retrieval updates the evidence pool
+- Retrieval updates the evidence pool
 
--Draft generation updates the report structure
+- Draft generation updates the report structure
 
--Verification produces pass/fail feedback
+- Verification produces pass/fail feedback
 
--Revision modifies plan and draft
+- Revision modifies plan and draft
 
 # Success Criteria
 
 The workflow succeeds if:
 
--The report answers the prompt
+- The report answers the prompt
 
--Each claim contains at least one citation
+- Each claim contains at least one citation
 
--All citations are verified
+- All citations are verified
 
--Maximum iteration limit is not exceeded
+- Maximum iteration limit is not exceeded
 
 # Failure Criteria
 
--Unverified citations remain
+- Unverified citations remain
 
--Maximum iterations reached
+- Maximum iterations reached
 
--Insufficient evidence found
+- Insufficient evidence found
 
 # Constraints
 
--Maximum 8 iterations
+- Maximum 8 iterations
 
--Only local documents allowed
+- Only local documents allowed
 
--No external web search
+- No external web search
 
--All decisions logged
+- All decisions logged
 
 # Architecture
 The system follows an explicit agent loop:
@@ -98,19 +98,19 @@ We compare the agentic workflow to a single-prompt baseline without iterative va
 
 We evaluate the workflow using:
 
--Citation accuracy (% verified citations)
+- Citation accuracy (% verified citations)
 
--Success rate across N prompts
+- Success rate across N prompts
 
--Average number of iterations
+- Average number of iterations
 
--Execution time per run
+- Execution time per run
 
 We compare:
 
-1.Single-prompt baseline (no tools, no validation)
+1. Single-prompt baseline (no tools, no validation)
 
-2.Agentic workflow (planning + tools + verification loop)
+2. Agentic workflow (planning + tools + verification loop)
 
 # How to Run
 pip install -r requirements.txt
