@@ -8,7 +8,7 @@ The system uses iterative planning, tool calls, validation, and recovery to ensu
 The goal is to generate a report about a given topic using only locally stored documents.
 The agent:
 
--Searches documents
+- Searches documents
 
 -Extracts candidate quotes
 
@@ -74,7 +74,7 @@ The workflow succeeds if:
 
 -Insufficient evidence found
 
-#Constraints
+# Constraints
 
 -Maximum 8 iterations
 
