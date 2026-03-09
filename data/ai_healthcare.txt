@@ -1,0 +1,3 @@
+Artificial intelligence is transforming healthcare through diagnostic assistance and predictive analytics.
+AI systems are used in radiology to detect anomalies in medical images.
+Machine learning improves patient outcome predictions.

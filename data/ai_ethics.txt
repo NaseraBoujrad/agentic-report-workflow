@@ -1,0 +1,2 @@
+AI in healthcare raises ethical concerns regarding bias and data privacy.
+Transparency and accountability are critical when deploying AI systems.

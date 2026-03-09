@@ -124,6 +124,11 @@ def verify(state, verifier):
     )
     state["verification_passed"] = passed
     state["verification_reason"] = reason
+    
+    if passed:
+        print(f"Verification passed because: {reason}")
+    else:
+        print(f"Verification failed because: {reason}")
 
 def reflect(state):
     print("Reflecting on failure...")
