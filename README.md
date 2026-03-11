@@ -49,7 +49,7 @@ The task succeeds when all citations are verified and the report meets defined c
 
 - User prompt (report topic)
 
-- Local document corpus (docs/)
+- Local document corpus (data/pdf)
 
 # Actions
 
