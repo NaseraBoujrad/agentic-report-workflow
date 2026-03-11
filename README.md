@@ -51,8 +51,6 @@ The task succeeds when all citations are verified and the report meets defined c
 
 - Local document corpus (docs/)
 
-- Optional metadata (titles, tags)
-
 # Actions
 
 The agent can:
@@ -114,10 +112,4 @@ The workflow succeeds if:
 # Agent
 The system follows an explicit agent loop:
 
-goal → plan → retrieve → extract → generate → verify → revise (if needed)
-
-State, tool calls, validation results, and iteration steps are logged.
-
-# Baseline
-We compare the agentic workflow to a single-prompt baseline without iterative validation.
-
+goal > plan > retrieve > extract > generate > verify > revise (if needed)
