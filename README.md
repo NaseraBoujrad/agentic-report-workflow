@@ -1,8 +1,34 @@
 # agentic-report-workflow
 Agentic workflow system that generates and verifies document based reports using iterative planning, tool use, and validation.
 # Overview
+A simple Python project that generates reports on a given topic using PDF sources. 
+Supports two modes: **baseline** (direct evidence retrieval) and **agent** (structured, verified draft generation).
+
 This project implements an agentic workflow that generates structured reports from local documents. 
 The system uses iterative planning, tool calls, validation, and recovery to ensure that all citations in the report are grounded in source documents.
+
+
+## Requirements
+
+- Python 3.13.5+
+- PyPdf
+- PyTesseract
+
+## Usage
+
+Run the agent or baseline mode with a prompt:
+
+# bash
+## Baseline mode
+python src/agent_runner.py --prompt "AI healthcare ethics" --mode baseline
+
+## Agent mode
+python src/agent_runner.py --prompt "AI healthcare ethics" --mode agent
+
+
+
+
+
 
 # Task Definition
 The goal is to generate a report about a given topic using only locally stored documents.
@@ -74,6 +100,8 @@ The workflow succeeds if:
 
 - Insufficient evidence found
 
+- Text too short
+
 # Constraints
 
 - Maximum 8 iterations
@@ -84,7 +112,7 @@ The workflow succeeds if:
 
 - All decisions logged
 
-# Architecture
+# Agent
 The system follows an explicit agent loop:
 
 goal → plan → retrieve → extract → generate → verify → revise (if needed)
@@ -94,30 +122,3 @@ State, tool calls, validation results, and iteration steps are logged.
 # Baseline
 We compare the agentic workflow to a single-prompt baseline without iterative validation.
 
-# Evaluation
-
-We evaluate the workflow using:
-
-- Citation accuracy (% verified citations)
-
-- Success rate across N prompts
-
-- Average number of iterations
-
-- Execution time per run
-
-We compare:
-
-1. Single-prompt baseline (no tools, no validation)
-
-2. Agentic workflow (planning + tools + verification loop)
-
-# How to Run
-pip install -r requirements.txt
-
-Place documents inside /docs
-
-Create a .env file based on .env.example
-
-Run:
-python src/agent_runner.py --prompt "Your topic here"

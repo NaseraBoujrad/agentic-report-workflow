@@ -10,35 +10,31 @@ class VerifierAgent:
         if not evidence:
             return False, "No evidence provided"
 
-        # --- Check unique sources ---
+        # --- Check unique sources from evidence directly ---
         sources = set()
-
         for e in evidence:
             if "[Source:" in e:
-                filename = e.split("[Source:")[1].replace("]", "").strip()
+                filename = e.split("[Source:")[1].split("]")[0].strip().lower()
+                sources.add(filename)
 
-                if os.path.exists(os.path.join(DATA_PATH, filename)):
-                    sources.add(filename)
-
-        # Dynamically require diversity
-        total_pdfs = len([f for f in os.listdir(DATA_PATH) if f.endswith(".pdf")])
-        required_sources = min(3, total_pdfs)
+        total_pdfs = len([f.lower() for f in os.listdir(DATA_PATH) if f.endswith(".pdf")])
+        required_sources = max(2, int(total_pdfs * 0.6))
 
         if len(sources) < required_sources:
-            return False, f"Not enough source diversity (need {required_sources})"
+            return False, f"Not enough source diversity (need {required_sources}, found {len(sources)})"
 
         # --- Check each section has citation ---
         for section in sections:
             section_marker = f"## {section}"
-
             if section_marker in draft:
-                section_text = draft.split(section_marker)[1]
-
-                if "[Source:" not in section_text:
-                    return False, f"No citation in section {section}"
+                section_parts = draft.split(section_marker)
+                if len(section_parts) > 1:
+                    section_text = section_parts[1].split("##")[0]
+                    if "[Source:" not in section_text:
+                        return False, f"No citation in section {section}"
 
         # --- Check minimum length ---
-        if len(draft.split()) < 100:
+        if len(draft.split()) < 300:
             return False, "Report too short"
 
         return True, "Verification passed"
