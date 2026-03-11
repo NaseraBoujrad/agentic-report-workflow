@@ -18,7 +18,6 @@ The system uses iterative planning, tool calls, validation, and recovery to ensu
 
 Run the agent or baseline mode with a prompt:
 
-# bash
 ## Baseline mode
 python src/agent_runner.py --prompt "AI healthcare ethics" --mode baseline
 
