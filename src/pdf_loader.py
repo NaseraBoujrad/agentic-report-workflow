@@ -3,7 +3,7 @@ import os
 import pdfplumber
 import pytesseract
 
-DATA_PATH = "data/pdf"
+DATA_PATH = "../data/pdf"
 
 def load_all_pdfs():
     documents = []

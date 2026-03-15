@@ -2,36 +2,41 @@ import argparse
 from tools import retrieve_documents
 from verifier_agent import VerifierAgent
 import random
+from langchain_community.chat_models import ChatOllama
 
+llm = ChatOllama(model="llama3")
 MAX_ITERATIONS = 8
 
 
 def plan(state):
-    print("Planning...")
+    print("Planning with LLM...")
 
     if state["plan"] is not None:
-        return  
+        return
 
-    goal = state["goal"].lower()
-    sections = []
+    prompt = f"""
+The user goal is: {state['goal']}.
 
-    if "ethic" in goal:
-        sections.append("Ethical concerns")
-    if "healthcare" in goal:
-        sections.append("Healthcare applications")
-    if "analytics" in goal:
-        sections.append("Predictive analytics use cases")
+Suggest 3–4 report sections that structure a report about this topic.
 
-    if not sections:
-        sections = ["Overview", "Implications", "Challenges"]
+Return ONLY the section titles as a comma separated list.
+Do not include explanations or extra text.
+
+Example output:
+Overview, Ethical concerns, Applications, Challenges
+"""
+
+    response = llm.invoke(prompt)
+
+    sections = [s.strip() for s in response.content.split(",")]
 
     state["plan"] = {
         "sections": sections,
         "required_evidence_per_section": 3,
-        "max_per_source": 15  # Track max per source for diversity
+        "max_per_source": 15
     }
 
-    print(f"Plan created: {state['plan']}")
+    print("Plan created:", state["plan"])
 
 
 def retrieve(state):
@@ -101,70 +106,28 @@ def retrieve(state):
             contributing_sources.add(s.split("[Source:")[1].split("]")[0].strip())
     print("PDFs contributing to evidence:", contributing_sources)
 
-
 def generate(state):
-    print("Evidence count:", len(state["evidence"]))
-    print("Evidence per section required:", state["plan"]["required_evidence_per_section"])
-    print("Generating draft...")
+    print("Generating draft with LLM...")
 
-    sections = state["plan"]["sections"]
-    required = state["plan"]["required_evidence_per_section"]
+    evidence_text = "\n".join(state["evidence"])
 
-    # unique filler sentences
-    filler_sentences = [
-        "Researchers continue to debate important aspects of this topic.",
-        "These findings highlight broader implications within the field.",
-        "Scholars emphasize that this area remains an evolving research domain."
-    ]
+    prompt = f"""
+    Write a structured report about: {state['goal']}.
+  
+    Sections:
+    {state['plan']['sections']}
 
-    draft_parts = [f"Report about {state['goal']}:\n"]
+    Use the following evidence:
+    {evidence_text}
 
-    #group evidence by source
-    source_groups = {}
-    for citation in state["evidence"]:
-        if "[Source:" not in citation:
-            continue
-        source = citation.split("[Source:")[1].split("]")[0].strip()
-        source_groups.setdefault(source, []).append(citation)
+    Each section should include evidence and explanation.
+    Cite sources using the format [Source: filename].
+    """
 
-    for section in sections:
-        draft_parts.append(f"\n## {section}\n")
-        section_parts = []
+    response = llm.invoke(prompt)
 
-        #add evidence first
-        added = 0
-        used_sources = set()
-        sources_with_evidence = [s for s, items in source_groups.items() if items]
-
-        while added < required and sources_with_evidence:
-            for source in sources_with_evidence:
-                if source_groups[source]:
-                    citation = source_groups[source].pop(0)
-                    expanded_text = (
-                        f"This evidence highlights an aspect of {section.lower()}. "
-                        f"{citation} "
-                        f"This illustrates how {state['goal']} connects to the broader context of {section.lower()}."
-                    )
-                    section_parts.append(expanded_text)
-                    added += 1
-                    used_sources.add(source)
-            sources_with_evidence = [s for s, items in source_groups.items() if items]
-
-        #If no evidence found for this section
-        if added == 0:
-            section_parts.append("Insufficient evidence available for this section.")
-
-        #add unique fillers if section is still too short
-        section_text = " ".join(section_parts)
-        unused_fillers = filler_sentences.copy()
-        while len(section_text.split()) < state["min_words_per_section"] and unused_fillers:
-            sentence = unused_fillers.pop(0)
-            section_parts.append(sentence)
-            section_text = " ".join(section_parts)
-
-        draft_parts.extend(section_parts)
-
-    state["draft"] = "\n".join(draft_parts)
+    state["draft"] = response.content
+    state["draft_history"].append(response.content)
 
 
 def verify(state, verifier):
@@ -210,13 +173,14 @@ def reflect(state):
 
 def run_agent(prompt: str):
     state = {
-        "goal": prompt,
-        "iteration": 0,
-        "plan": None,
-        "evidence": [],
-        "draft": None,
-        "verification_passed": False,
-        "min_words_per_section": 80
+         "goal": prompt,
+         "iteration": 0,
+         "plan": None,
+         "evidence": [],
+         "draft": None,
+         "draft_history": [],
+         "verification_passed": False,
+         "min_words_per_section": 80
     }
 
     print(f"\nStarting agent for: {prompt}\n")
@@ -228,12 +192,19 @@ def run_agent(prompt: str):
 
         plan(state)
         retrieve(state)
+        print("Evidence used:", len(state["evidence"]))
+        
         generate(state)
         verify(state, verifier)
+        print("Current draft length:", len(state["draft"].split()))
+        print("Draft history length:", len(state["draft_history"]))
 
-        if state["verification_passed"]:
-            print("\nSuccess: Verification passed.\n")
-            return state
+
+    if state["verification_passed"]:
+        print("\nSuccess: Verification passed.\n")
+        print("\nFinal Draft:\n")
+        print(state["draft"])
+        return state
 
         print("Verification failed. Revising...\n")
         reflect(state)

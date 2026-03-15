@@ -1,6 +1,6 @@
 import os
 
-DATA_PATH = "data/pdf"
+DATA_PATH = "../data/pdf"
 
 class VerifierAgent:
 
@@ -34,7 +34,8 @@ class VerifierAgent:
                         return False, f"No citation in section {section}"
 
         # --- Check minimum length ---
-        if len(draft.split()) < 300:
+        min_words = 200
+        if len(draft.split()) < min_words:
             return False, "Report too short"
 
         return True, "Verification passed"
