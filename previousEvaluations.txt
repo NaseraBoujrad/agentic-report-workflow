@@ -1,0 +1,54 @@
+
+EVALUATION RESULTS test 1
+    ==================
+    Timestamp: 2026-03-25 17:37:49.900527
+
+    Total Runs: 15
+
+    Verification Pass Rate: 13.33%
+    Retry Success Rate: 7.14%
+    Citation Accuracy: 100.00%
+    Average Violations per Run: 0.53
+
+
+
+
+EVALUATION RESULTS test 2
+    ==================
+    Timestamp: 2026-03-25 19:25:27.554999
+
+    Total Runs: 15
+
+    Verification Pass Rate: 33.33%
+    Retry Success Rate: 9.09%
+    Citation Accuracy: 100.00%
+    Average Violations per Run: 0.73
+
+
+
+
+EVALUATION RESULTS test 3
+    ==================
+    Timestamp: 2026-03-25 20:26:23.962831
+
+    Total Runs: 15
+
+    Verification Pass Rate: 20.00%
+    Retry Success Rate: 14.29%
+    Citation Accuracy: 100.00%
+    Average Violations per Run: 0.80
+
+
+
+
+EVALUATION RESULTS test 4 SENASTE - MATCHAR MED NUVARANDE VERSION AV PROGRAMMET
+    ==================
+    Timestamp: 2026-03-25 21:41:44.878899
+
+    Total Runs: 15
+
+    Verification Pass Rate: 66.67%
+    Retry Success Rate: 15.38%
+    Citation Accuracy: 100.00%
+    Average Violations per Run: 0.33
+
