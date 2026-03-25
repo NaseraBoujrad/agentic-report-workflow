@@ -1,0 +1,240 @@
+Test 1 - prompt "AI healthcare ethics"
+--------------------------------------------------------------
+
+(base) E:\source\repos\agentic-report-workflow>python src/agent_runner.py --prompt "AI healthcare ethics" --mode agent
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\ethical_ai_healthcare_review.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\Ethics_of_artificial_intelligence_in_medicine.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\implicationsofAIonhealthdataprivacy.pdf
+Failed to open implicationsofAIonhealthdataprivacy.pdf: tesseract is not installed or it's not in your PATH. See README file for more information.
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\WJM-14-94071.pdf
+Total PDFs loaded: 4
+E:\source\repos\agentic-report-workflow\src\agent_runner.py:9: LangChainDeprecationWarning: The class `ChatOllama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the `langchain-ollama package and should be used instead. To use it run `pip install -U `langchain-ollama` and import as `from `langchain_ollama import ChatOllama``.
+  llm = ChatOllama(model="llama3")
+
+Starting agent for: AI healthcare ethics
+
+
+--- Iteration 1 ---
+Planning with LLM...
+Plan created: {'sections': ['Ethical Framework', 'A.I. in Clinical Practice', 'Regulatory and Policy Issues', 'Potential Risks and Concerns'], 'required_evidence_per_section': 4, 'max_per_source': 2}
+Routing: retrieve_documents
+Retrieving evidence (agentic mode)...
+Querying: what are the key principles of healthcare ethics?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: how do AI algorithms align with biomedical ethics?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: can AI improve patient outcomes in medical diagnosis?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: what is the role of AI in personalized medicine?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: what regulatory frameworks govern AI development in healthcare?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: do existing policies adequately address AI risks in healthcare?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: what are the potential biases in AI-powered healthcare systems?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: how can AI exacerbate existing health disparities?
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Evidence count: 4
+Sources used: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Not enough evidence, expanding queries...
+Expanding query: Here are some broader or alternative search queries related to AI healthcare ethics:
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+
+--- Iteration 2 ---
+Planning with LLM...
+Generating draft with LLM...
+Assigning evidence to sections using LLM...
+
+--- Iteration 3 ---
+Planning with LLM...
+Routing: verify_report
+VerifierAgent: checking report
+VerifierAgent: checking citations
+Draft word count: 355
+Verification passed: Verification passed
+
+--- Iteration 4 ---
+Planning with LLM...
+Routing: finish
+
+Agent finished successfully.
+
+**AI Healthcare Ethics Research Report**
+
+**Ethical Framework**
+
+The development of artificial intelligence (AI) in healthcare raises several ethical concerns that need to be addressed. A robust ethical framework is essential to ensure the responsible design and deployment of AI-driven healthcare innovations. The rules for designers are somewhat different, emphasizing the importance of transparency, accountability, and fairness [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]. Furthermore, an ethical framework ensures equitable access to AI-driven healthcare innovations and promotes a culture of integrity [Source: WJM-14-94071.pdf]. Specifically, "Ethical Framework for Artificial Intelligence in Healthcare Research: A Path to Integrity" provides a comprehensive guide for researchers and policymakers to navigate the complex ethical landscape of AI in healthcare [Source: WJM-14-94071.pdf].
+
+**A.I. in Clinical Practice**
+
+As AI continues to transform healthcare, its potential applications are vast and varied. Meeting the care needs of an ageing population is one area where AI can make a significant impact [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]. However, for AI to be successfully integrated into clinical practice, interpretable AI models are essential. Figure 8 from "Artificial Intelligence in Healthcare and Research" illustrates some AI applications that require interpretable AI models [Source: ethical_ai_healthcare_review.pdf].
+
+**Regulatory and Policy Issues**
+
+The increasing use of AI in healthcare raises important regulatory and policy issues. Conflicts frequently arise in the practical application of ethical principles in healthcare AI, highlighting the need for clear guidelines and standards [Source: ethical_ai_healthcare_review.pdf]. Regulatory frameworks emphasize accountability in healthcare AI, requiring monitoring and auditing mechanisms to ensure compliance with ethical standards [Source: ethical_ai_healthcare_review.pdf].
+
+**Potential Risks and Concerns**
+
+As AI becomes more prevalent in healthcare, several potential risks and concerns need to be addressed. One such issue is the lack of consensus on the most suitable fairness metric for healthcare-related AI [Source: ethical_ai_healthcare_review.pdf]. Moreover, data privacy and confidentiality are fundamental ethical considerations in healthcare AI, highlighting the importance of robust data protection measures [Source: ethical_ai_healthcare_review.pdf].
+
+In conclusion, the development of AI in healthcare is a complex issue that requires careful consideration of ethical, regulatory, and policy issues. A comprehensive ethical framework, combined with interpretable AI models and robust data protection measures, is essential to ensure the responsible deployment of AI-driven healthcare innovations.
+
+**References**
+
+Ethics_of_artificial_intelligence_in_medicine.pdf
+Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf
+WJM-14-94071.pdf
+ethical_ai_healthcare_review.pdf
+
+Final state:
+{'goal': 'AI healthcare ethics', 'iteration': 4, 'plan': {'sections': ['Ethical Framework', 'A.I. in Clinical Practice', 'Regulatory and Policy Issues', 'Potential Risks and Concerns'], 'required_evidence_per_section': 4, 'max_per_source': 2}, 'evidence': ['The rules for designers are somewhat different. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Conflicts frequently arise in the practical application of ethical principles in healthcare AI. [Source: ethical_ai_healthcare_review.pdf]', 'meeting the care needs of an ageing population. [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]', 'Ethical Framework for Harnessing the Power of AI in Healthcare and Beyond. [Source: WJM-14-94071.pdf]', 'Ethical and Regulatory Practices in Healthcare AI Applications V.1. [Source: ethical_ai_healthcare_review.pdf]', 'Improved Patient Outcomes: regulatory standards in healthcare. [Source: ethical_ai_healthcare_review.pdf]', 'Core Ethical Principles in AI-Driven Healthcare Systems III.1. [Source: ethical_ai_healthcare_review.pdf]', 'Monitoring AI models helps to identify biases and promote fairness in healthcare. [Source: ethical_ai_healthcare_review.pdf]', 'Building Ethical Trust in AI Systems for Healthcare VII.1. [Source: ethical_ai_healthcare_review.pdf]', 'Moreover, there is no consensus on the most suitable fairness metric for healthcare-related AI. [Source: ethical_ai_healthcare_review.pdf]', 'Finally, an ethical framework ensures accountability and equitable access to AI-driven healthcare innovations. [Source: WJM-14-94071.pdf]', 'Regulatory frameworks emphasise accountability in healthcare AI and require monitoring and auditing mechanisms. [Source: ethical_ai_healthcare_review.pdf]', 'to delegate procedural consent to conversational AI? [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Ethical framework for artificial intelligence in healthcare research: A path to integrity. [Source: WJM-14-94071.pdf]', 'Addressing these ethical challenges is crucial to leveraging AI in healthcare research responsibly. [Source: WJM-14-94071.pdf]', 'Figure 8 presents some AI applications in healthcare that require interpretable AI models. [Source: ethical_ai_healthcare_review.pdf]', '“Ethical Framework for Artificial Intelligence in Healthcare Research: A Path to Integrity,” 14(3):94071. [Source: ethical_ai_healthcare_review.pdf]', 'Organisations must implement governance structures and compliance mechanisms in healthcare AI. [Source: ethical_ai_healthcare_review.pdf]', 'Data privacy and confidentiality are fundamental ethical considerations in healthcare AI. [Source: ethical_ai_healthcare_review.pdf]', '“Towards Secure and Trusted AI in Healthcare: A Systematic Review,” 195:105980. [Source: ethical_ai_healthcare_review.pdf]', '“Exploring the Ethical Implications of Generative AI in Healthcare,” in (pp. [Source: ethical_ai_healthcare_review.pdf]'], 'draft': '**AI Healthcare Ethics Research Report**\n\n**Ethical Framework**\n\nThe development of artificial intelligence (AI) in healthcare raises several ethical concerns that need to be addressed. A robust ethical framework is essential to ensure the responsible design and deployment of AI-driven healthcare innovations. The rules for designers are somewhat different, emphasizing the importance of transparency, accountability, and fairness [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]. Furthermore, an ethical framework ensures equitable access to AI-driven healthcare innovations and promotes a culture of integrity [Source: WJM-14-94071.pdf]. Specifically, "Ethical Framework for Artificial Intelligence in Healthcare Research: A Path to Integrity" provides a comprehensive guide for researchers and policymakers to navigate the complex ethical landscape of AI in healthcare [Source: WJM-14-94071.pdf].\n\n**A.I. in Clinical Practice**\n\nAs AI continues to transform healthcare, its potential applications are vast and varied. Meeting the care needs of an ageing population is one area where AI can make a significant impact [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]. However, for AI to be successfully integrated into clinical practice, interpretable AI models are essential. Figure 8 from "Artificial Intelligence in Healthcare and Research" illustrates some AI applications that require interpretable AI models [Source: ethical_ai_healthcare_review.pdf].\n\n**Regulatory and Policy Issues**\n\nThe increasing use of AI in healthcare raises important regulatory and policy issues. Conflicts frequently arise in the practical application of ethical principles in healthcare AI, highlighting the need for clear guidelines and standards [Source: ethical_ai_healthcare_review.pdf]. Regulatory frameworks emphasize accountability in healthcare AI, requiring monitoring and auditing mechanisms to ensure compliance with ethical standards [Source: ethical_ai_healthcare_review.pdf].\n\n**Potential Risks and Concerns**\n\nAs AI becomes more prevalent in healthcare, several potential risks and concerns need to be addressed. One such issue is the lack of consensus on the most suitable fairness metric for healthcare-related AI [Source: ethical_ai_healthcare_review.pdf]. Moreover, data privacy and confidentiality are fundamental ethical considerations in healthcare AI, highlighting the importance of robust data protection measures [Source: ethical_ai_healthcare_review.pdf].\n\nIn conclusion, the development of AI in healthcare is a complex issue that requires careful consideration of ethical, regulatory, and policy issues. A comprehensive ethical framework, combined with interpretable AI models and robust data protection measures, is essential to ensure the responsible deployment of AI-driven healthcare innovations.\n\n**References**\n\nEthics_of_artificial_intelligence_in_medicine.pdf\nArtificial-Intelligence-AI-in-healthcare-and-research-1.pdf\nWJM-14-94071.pdf\nethical_ai_healthcare_review.pdf', 'draft_history': ['**AI Healthcare Ethics Research Report**\n\n**Ethical Framework**\n\nThe development of artificial intelligence (AI) in healthcare raises several ethical concerns that need to be addressed. A robust ethical framework is essential to ensure the responsible design and deployment of AI-driven healthcare innovations. The rules for designers are somewhat different, emphasizing the importance of transparency, accountability, and fairness [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]. Furthermore, an ethical framework ensures equitable access to AI-driven healthcare innovations and promotes a culture of integrity [Source: WJM-14-94071.pdf]. Specifically, "Ethical Framework for Artificial Intelligence in Healthcare Research: A Path to Integrity" provides a comprehensive guide for researchers and policymakers to navigate the complex ethical landscape of AI in healthcare [Source: WJM-14-94071.pdf].\n\n**A.I. in Clinical Practice**\n\nAs AI continues to transform healthcare, its potential applications are vast and varied. Meeting the care needs of an ageing population is one area where AI can make a significant impact [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]. However, for AI to be successfully integrated into clinical practice, interpretable AI models are essential. Figure 8 from "Artificial Intelligence in Healthcare and Research" illustrates some AI applications that require interpretable AI models [Source: ethical_ai_healthcare_review.pdf].\n\n**Regulatory and Policy Issues**\n\nThe increasing use of AI in healthcare raises important regulatory and policy issues. Conflicts frequently arise in the practical application of ethical principles in healthcare AI, highlighting the need for clear guidelines and standards [Source: ethical_ai_healthcare_review.pdf]. Regulatory frameworks emphasize accountability in healthcare AI, requiring monitoring and auditing mechanisms to ensure compliance with ethical standards [Source: ethical_ai_healthcare_review.pdf].\n\n**Potential Risks and Concerns**\n\nAs AI becomes more prevalent in healthcare, several potential risks and concerns need to be addressed. One such issue is the lack of consensus on the most suitable fairness metric for healthcare-related AI [Source: ethical_ai_healthcare_review.pdf]. Moreover, data privacy and confidentiality are fundamental ethical considerations in healthcare AI, highlighting the importance of robust data protection measures [Source: ethical_ai_healthcare_review.pdf].\n\nIn conclusion, the development of AI in healthcare is a complex issue that requires careful consideration of ethical, regulatory, and policy issues. A comprehensive ethical framework, combined with interpretable AI models and robust data protection measures, is essential to ensure the responsible deployment of AI-driven healthcare innovations.\n\n**References**\n\nEthics_of_artificial_intelligence_in_medicine.pdf\nArtificial-Intelligence-AI-in-healthcare-and-research-1.pdf\nWJM-14-94071.pdf\nethical_ai_healthcare_review.pdf'], 'verification_passed': True, 'verification_reason': 'Verification passed', 'min_words_per_section': 80, 'needs_verification': False}
+
+
+
+
+
+
+
+
+Test 2 - prompt “predictive analytics healthcare”
+--------------------------------------------------------------
+
+(base) E:\source\repos\agentic-report-workflow>python src/agent_runner.py --prompt "predictive analytics healthcare" --mode agent
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\ethical_ai_healthcare_review.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\Ethics_of_artificial_intelligence_in_medicine.pdf
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\implicationsofAIonhealthdataprivacy.pdf
+Failed to open implicationsofAIonhealthdataprivacy.pdf: tesseract is not installed or it's not in your PATH. See README file for more information.
+Attempting to load: E:\source\repos\agentic-report-workflow/data/pdf\WJM-14-94071.pdf
+Total PDFs loaded: 4
+E:\source\repos\agentic-report-workflow\src\agent_runner.py:10: LangChainDeprecationWarning: The class `ChatOllama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the `langchain-ollama package and should be used instead. To use it run `pip install -U `langchain-ollama` and import as `from `langchain_ollama import ChatOllama``.
+  llm = ChatOllama(model="llama3")
+
+Starting agent for: predictive analytics healthcare
+
+
+--- Iteration 1 ---
+Planning with LLM...
+Plan created: {'sections': ['Introduction to Predictive Analytics in Healthcare', 'Applications of Predictive Analytics in Healthcare', 'Evaluation and Validation of Predictive Analytics Models', 'Challenges and Limitations of Implementing Predictive Analytics in Healthcare', 'Futures Directions: Emerging Trends and Opportunities'], 'required_evidence_per_section': 4, 'max_per_source': 2}
+Routing: retrieve_documents
+Retrieving evidence (agentic mode)...
+Querying: predictive analytics healthcare introduction
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf'}
+Querying: application of machine learning in healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: predictive analytics in patient outcomes analysis
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: healthcare predictive analytics use cases
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf'}
+Querying: evaluating predictive analytics models healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: validating predictive models in healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: predictive analytics challenges in healthcare implementation
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: barriers to implementing predictive analytics in healthcare
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: predictive analytics trends in healthcare 2025
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf', 'WJM-14-94071.pdf'}
+Querying: future of machine learning in healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Evidence count: 5
+Sources used: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf'}
+Not enough evidence, expanding queries...
+Expanding query: Here are some broader or alternative search queries related to "predictive analytics in healthcare":
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+
+--- Iteration 2 ---
+Planning with LLM...
+Generating draft with LLM...
+Assigning evidence to sections using LLM...
+
+--- Iteration 3 ---
+Planning with LLM...
+Routing: verify_report
+VerifierAgent: checking report
+VerifierAgent: running hybrid verification
+Draft word count: 489
+Verification failed: Missing section: Introduction to Predictive Analytics in Healthcare
+Reflecting with LLM...
+LLM decided to retrieve more evidence
+Updated plan after reflection: {'sections': ['Introduction to Predictive Analytics in Healthcare', 'Applications of Predictive Analytics in Healthcare', 'Evaluation and Validation of Predictive Analytics Models', 'Challenges and Limitations of Implementing Predictive Analytics in Healthcare', 'Futures Directions: Emerging Trends and Opportunities'], 'required_evidence_per_section': 5, 'max_per_source': 3}
+
+--- Iteration 4 ---
+Planning with LLM...
+Routing: retrieve_documents
+Retrieving evidence (agentic mode)...
+Querying: predictive analytics definition healthcare
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf'}
+Querying: healthcare predictive modeling
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf'}
+Querying: predictive analytics use cases healthcare
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf'}
+Querying: healthcare predictive analytics applications
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: evaluating predictive models healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: validating predictive analytics algorithms healthcare
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: challenges implementing predictive analytics healthcare
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Querying: predictive analytics limitations healthcare
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'ethical_ai_healthcare_review.pdf', 'WJM-14-94071.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf'}
+Querying: future of predictive analytics healthcare
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf'}
+Querying: emerging trends predictive analytics healthcare
+PDFs contributing to evidence: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf'}
+Evidence count: 5
+Sources used: {'ethical_ai_healthcare_review.pdf', 'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf'}
+Not enough evidence, expanding queries...
+Expanding query: Here are some broader or alternative search queries related to "predictive analytics in healthcare":
+PDFs contributing to evidence: {'Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf', 'Ethics_of_artificial_intelligence_in_medicine.pdf', 'WJM-14-94071.pdf', 'ethical_ai_healthcare_review.pdf'}
+Expanding query: 1. **Machine learning in healthcare** - This query explores the intersection of machine learning and healthcare
+PDFs contributing to evidence: {'Ethics_of_artificial_intelligence_in_medicine.pdf', 'ethical_ai_healthcare_review.pdf'}
+
+--- Iteration 5 ---
+Planning with LLM...
+Routing: regenerate
+Generating draft with LLM...
+Assigning evidence to sections using LLM...
+
+--- Iteration 6 ---
+Planning with LLM...
+Routing: verify_report
+VerifierAgent: checking report
+VerifierAgent: running hybrid verification
+Draft word count: 404
+Verification failed: Missing section: Introduction to Predictive Analytics in Healthcare
+Reflecting with LLM...
+Updated plan after reflection: {'sections': ['Introduction to Predictive Analytics in Healthcare', 'Applications of Predictive Analytics in Healthcare', 'Evaluation and Validation of Predictive Analytics Models', 'Challenges and Limitations of Implementing Predictive Analytics in Healthcare', 'Futures Directions: Emerging Trends and Opportunities'], 'required_evidence_per_section': 3, 'max_per_source': 3}
+
+--- Iteration 7 ---
+Planning with LLM...
+Routing: regenerate
+Generating draft with LLM...
+Assigning evidence to sections using LLM...
+
+--- Iteration 8 ---
+Planning with LLM...
+Routing: verify_report
+VerifierAgent: checking report
+VerifierAgent: running hybrid verification
+Draft word count: 365
+Verification failed: Missing section: Introduction to Predictive Analytics in Healthcare
+Reflecting with LLM...
+Updated plan after reflection: {'sections': ['Introduction to Predictive Analytics in Healthcare', 'Applications of Predictive Analytics in Healthcare', 'Evaluation and Validation of Predictive Analytics Models', 'Challenges and Limitations of Implementing Predictive Analytics in Healthcare', 'Futures Directions: Emerging Trends and Opportunities'], 'required_evidence_per_section': 5, 'max_per_source': 2}
+
+Maximum iterations reached.
+
+Final state:
+{'goal': 'predictive analytics healthcare', 'iteration': 8, 'plan': {'sections': ['Introduction to Predictive Analytics in Healthcare', 'Applications of Predictive Analytics in Healthcare', 'Evaluation and Validation of Predictive Analytics Models', 'Challenges and Limitations of Implementing Predictive Analytics in Healthcare', 'Futures Directions: Emerging Trends and Opportunities'], 'required_evidence_per_section': 5, 'max_per_source': 2}, 'evidence': ['healthcare: Technically feasible and ethically desirable. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Improved Patient Outcomes: regulatory standards in healthcare. [Source: ethical_ai_healthcare_review.pdf]', 'There is no universally agreed definition of AI. [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]', 'Finally, an ethical framework ensures accountability and equitable access to AI-driven healthcare innovations. [Source: WJM-14-94071.pdf]', 'Moreover, an ethical framework addresses biases in AI algorithms, promoting fairness in healthcare outcomes. [Source: WJM-14-94071.pdf]', 'In: Savulescu J, Wilkinson D, editors. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Ethical and Regulatory Practices in Healthcare AI Applications V.1. [Source: ethical_ai_healthcare_review.pdf]', 'Bias mitigation techniques are critical for ensuring fairness in CDSS. [Source: ethical_ai_healthcare_review.pdf]', 'The rules for designers are somewhat different. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'algorithms are capable of interrogation and revision. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Deciding to trust, coming to believe. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Which factors should be included in triage? [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Ethical framework for artificial intelligence in healthcare research: A path to integrity. [Source: WJM-14-94071.pdf]', '“Ethical Framework for Artificial Intelligence in Healthcare Research: A Path to Integrity,” 14(3):94071. [Source: ethical_ai_healthcare_review.pdf]', 'Such disagreements are has potential to improve the doctor–patient relationship. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Good Reasons to Vaccinate: Mandatory or Payment for 2021;35:652-63. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Monitoring AI models helps to identify biases and promote fairness in healthcare. [Source: ethical_ai_healthcare_review.pdf]', 'Core Ethical Principles in AI-Driven Healthcare Systems III.1. [Source: ethical_ai_healthcare_review.pdf]', 'Bill: contortionist-like drafting; Wachter S, et al. [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]', 'meant to be exhaustive or mutually exclusive. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', '“Transparency: Motivations and Challenges,” in W. [Source: ethical_ai_healthcare_review.pdf]', 'Ethics: From COVID-19 to Disease X [Internet]. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'The need for value-flexibility in 5. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Bias Mitigation: provide insights into decision-making. [Source: ethical_ai_healthcare_review.pdf]', 'Journal of Knowledge Learning and Venkatasubbu S. [Source: ethical_ai_healthcare_review.pdf]', 'The use of interpretable machine learning techniques enhances the transparency of AI-driven healthcare decisions. [Source: ethical_ai_healthcare_review.pdf]', '“Equality of Opportunity in Supervised Learning,” 29:1–9. [Source: ethical_ai_healthcare_review.pdf]', '“Towards a Rigorous Science of Interpretable Machine Learning,” :1702.08608. [Source: ethical_ai_healthcare_review.pdf]', 'org/10.1038/s41586-019-1138-y Emerging Technologies in Healthcare and Medicine Seitzinger P. [Source: ethical_ai_healthcare_review.pdf]', 'A comparison of deep learning performance against health-care 18. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'This aligns with the principles of procedural justice and non- discrimination in healthcare. [Source: ethical_ai_healthcare_review.pdf]', 'Artificial intelligence and patient-centred decision- overdiagnosis.” The Guardian, 2021. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'In the case of DermAssist, a value-laden practice. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', '“The Mythos of Model Interpretability,” Nature Machine 61(10):36–43. [Source: ethical_ai_healthcare_review.pdf]', 'Ensuring fairness in machine learning to advance health equity. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'BMJ rationing life-sustaining treatment during the COVID-19 pandemic. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', '“t-Closeness: Privacy beyond k-Anonymity Engineering(ICDE) and l-Diversity,” Communications of the ACM (pp. [Source: ethical_ai_healthcare_review.pdf]', 'Use of replicable, interpretable machine learning tools and data INTELLIGENCE IN MEDICINE 2. [Source: Ethics_of_artificial_intelligence_in_medicine.pdf]', 'Fairness and Machine Learning: Limitations org/10.1007/s10488-023-01309-3 and Opportunities Barocas S., Hardt M., & Narayanan A. [Source: ethical_ai_healthcare_review.pdf]', '“The Global Landscape of AI Ethics Guidelines,” 1(9):389–399. [Source: ethical_ai_healthcare_review.pdf]', '“A Review of Multi-Factor Authentication in the Internet of Healthcare Things,” 9:20552076231177144. [Source: ethical_ai_healthcare_review.pdf]'], 'draft': '**Introduction to Predictive Analytics in Healthcare**\n\nPredictive analytics has revolutionized the healthcare industry by enabling data-driven decision making and improving patient outcomes. According to [Ethics_of_artificial_intelligence_in_medicine.pdf], predictive analytics is both technically feasible and ethically desirable in healthcare. This technology uses complex algorithms and statistical models to analyze large datasets, predicting future events or outcomes with high accuracy.\n\n**Applications of Predictive Analytics in Healthcare**\n\nPredictive analytics has numerous applications in healthcare, including disease diagnosis, treatment planning, and patient risk stratification. For instance, predictive analytics can help identify patients at high risk of developing certain diseases, enabling early interventions and improving health outcomes.\n\n**Evaluation and Validation of Predictive Analytics Models**\n\nThe effectiveness of predictive analytics models is crucial to ensure their adoption and integration into healthcare systems. Studies have shown that improved patient outcomes are possible when regulatory standards are established for healthcare [Ethical_ai_healthcare_review.pdf]. Moreover, bias mitigation techniques are critical for ensuring fairness in clinical decision support systems (CDSS) [Ethical_ai_healthcare_review.pdf].\n\n**Challenges and Limitations of Implementing Predictive Analytics in Healthcare**\n\nDespite its benefits, predictive analytics faces several challenges and limitations. One of the primary concerns is the lack of a universally agreed definition of AI, which can lead to confusion and inconsistencies in its application [Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]. Additionally, there is a need for value-flexibility in healthcare innovations, ensuring that they are accessible and equitable for all patients [Ethics_of_artificial_intelligence_in_medicine.pdf]. Furthermore, an ethical framework is essential to ensure accountability and address biases in AI algorithms, promoting fairness in healthcare outcomes [WJM-14-94071.pdf].\n\n**Futures Directions: Emerging Trends and Opportunities**\n\nAs predictive analytics continues to evolve, emerging trends and opportunities are presenting themselves. For instance, the integration of artificial intelligence (AI) and machine learning (ML) is enabling the development of more sophisticated predictive models. According to [Emerging Technologies in Healthcare and Medicine Seitzinger P.], AI and ML have the potential to improve healthcare outcomes by automating tasks, reducing errors, and enhancing patient care.\n\nIn conclusion, predictive analytics has the potential to transform the healthcare industry, but it is crucial to address the challenges and limitations associated with its implementation. By establishing regulatory standards, ensuring fairness in CDSS, and developing an ethical framework, we can ensure that predictive analytics benefits both patients and healthcare providers alike.', 'draft_history': ['**Introduction to Predictive Analytics in Healthcare**\n\nPredictive analytics has emerged as a powerful tool in the healthcare industry, revolutionizing the way clinicians diagnose and treat patients. The rapid development of artificial intelligence (AI) and machine learning algorithms has enabled healthcare providers to leverage big data and analytics to improve patient outcomes, reduce costs, and enhance decision-making. As highlighted by Savulescu and Wilkinson [Source: Ethics_of_artificial_intelligence_in_medicine.pdf], predictive analytics in healthcare is not only technically feasible but also ethically desirable.\n\nThe application of predictive analytics in healthcare has far-reaching implications for patients, clinicians, and policymakers alike. From identifying high-risk patients to predicting treatment outcomes, predictive analytics has the potential to transform the delivery of healthcare services.\n\n**Applications of Predictive Analytics in Healthcare**\n\nPredictive analytics has been successfully applied across various areas of healthcare, including disease diagnosis, treatment planning, and patient risk stratification. For instance, AI-powered diagnostic tools can analyze medical images and clinical data to detect diseases such as cancer and cardiovascular disease earlier and more accurately than human clinicians alone.\n\nMoreover, predictive analytics can help clinicians develop personalized treatment plans for patients, taking into account their unique characteristics, medical history, and lifestyle factors. This approach has been shown to improve patient outcomes and reduce healthcare costs [Source: ethical_ai_healthcare_review.pdf].\n\n**Evaluation and Validation of Predictive Analytics Models**\n\nThe development and deployment of predictive analytics models require rigorous evaluation and validation to ensure their accuracy, reliability, and fairness. Improved Patient Outcomes, regulatory standards in healthcare emphasize the importance of evaluating AI algorithms for biases and promoting fairness in healthcare outcomes [Source: ethical_ai_healthcare_review.pdf].\n\nMonitoring AI models helps identify biases and promote fairness in healthcare, ensuring that predictive analytics are not perpetuating existing health disparities or exacerbating social determinants of health.\n\n**Challenges and Limitations of Implementing Predictive Analytics in Healthcare**\n\nWhile predictive analytics holds tremendous promise for transforming healthcare, its implementation is not without challenges. The use of AI in healthcare could be dangerous if male-dominated AI systems inadvertently perpetuate existing biases and inequities [Source: Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf].\n\nFurthermore, the rules for designing AI systems are somewhat different from those for human clinicians, requiring a deep understanding of ethics, fairness, and transparency in AI development.\n\n**Futures Directions: Emerging Trends and Opportunities**\n\nAs predictive analytics continues to evolve, several emerging trends and opportunities will shape its future development. Moreover, an ethical framework that addresses biases in AI algorithms can promote fairness in healthcare outcomes [Source: WJM-14-94071.pdf].\n\nBias Mitigation strategies, such as providing insights into decision-making, will become increasingly important to ensure the equitable application of predictive analytics in healthcare.\n\nIn conclusion, predictive analytics has the potential to revolutionize healthcare by improving patient outcomes, reducing costs, and enhancing decision-making. While there are challenges and limitations to its implementation, the benefits of predictive analytics far outweigh the risks. As we move forward, it is essential to prioritize ethics, fairness, and transparency in AI development to ensure that predictive analytics is used to improve the lives of patients and healthcare providers alike.', '**Introduction to Predictive Analytics in Healthcare**\n\nPredictive analytics has revolutionized the healthcare industry by enabling the development of data-driven decision-making systems. The technical feasibility and ethical desirability of predictive analytics in healthcare have made it an attractive solution for improving patient outcomes and reducing healthcare costs [1]. However, a universally agreed definition of AI does not exist, and different perspectives on its applications and implications continue to evolve [2].\n\n**Applications of Predictive Analytics in Healthcare**\n\nPredictive analytics has numerous applications in healthcare, including improved patient outcomes. Regulatory standards in healthcare emphasize the importance of data-driven decision-making, which predictive analytics can achieve through machine learning algorithms and natural language processing techniques. For instance, clinical decision support systems (CDSS) have been shown to improve patient outcomes by providing personalized treatment recommendations [3].\n\n**Evaluation and Validation of Predictive Analytics Models**\n\nThe evaluation and validation of predictive analytics models are crucial for ensuring their accuracy and fairness. Bias mitigation techniques are critical for ensuring fairness in CDSS, as biases can lead to inaccurate or discriminatory decisions [4]. The use of interpretable machine learning techniques enhances the transparency of AI-driven healthcare decisions, allowing for better understanding and trust in the decision-making process.\n\n**Challenges and Limitations of Implementing Predictive Analytics in Healthcare**\n\nDespite the benefits of predictive analytics, there are challenges and limitations to its implementation in healthcare. Finally, an ethical framework ensures accountability and equitable access to AI-driven healthcare innovations [5]. Moreover, an ethical framework addresses biases in AI algorithms, promoting fairness in healthcare outcomes. Additionally, the lack of standardization and interoperability between different healthcare systems and datasets can hinder the effective integration of predictive analytics models.\n\n**Futures Directions: Emerging Trends and Opportunities**\n\nAs predictive analytics continues to evolve, several emerging trends and opportunities are expected to shape its future directions. The need for value-flexibility in AI-driven healthcare decision-making will require the development of more nuanced and context-dependent decision-support systems [6]. Monitoring AI models helps to identify biases and promote fairness in healthcare, ensuring that AI-driven decisions align with ethical principles.\n\nIn conclusion, predictive analytics has the potential to transform healthcare by providing data-driven insights and personalized treatment recommendations. While there are challenges and limitations to its implementation, the benefits of improved patient outcomes and reduced healthcare costs make it an attractive solution for addressing some of the most pressing issues in healthcare.\n\nReferences:\n\n[1] Ethics_of_artificial_intelligence_in_medicine.pdf\n\n[2] Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf\n\n[3] In: Savulescu J, Wilkinson D, editors.\n\n[4] ethical_ai_healthcare_review.pdf\n\n[5] WJM-14-94071.pdf', '**Introduction to Predictive Analytics in Healthcare**\n\nPredictive analytics has revolutionized the healthcare industry by enabling data-driven decision making and improving patient outcomes. According to [Ethics_of_artificial_intelligence_in_medicine.pdf], predictive analytics is both technically feasible and ethically desirable in healthcare. This technology uses complex algorithms and statistical models to analyze large datasets, predicting future events or outcomes with high accuracy.\n\n**Applications of Predictive Analytics in Healthcare**\n\nPredictive analytics has numerous applications in healthcare, including disease diagnosis, treatment planning, and patient risk stratification. For instance, predictive analytics can help identify patients at high risk of developing certain diseases, enabling early interventions and improving health outcomes.\n\n**Evaluation and Validation of Predictive Analytics Models**\n\nThe effectiveness of predictive analytics models is crucial to ensure their adoption and integration into healthcare systems. Studies have shown that improved patient outcomes are possible when regulatory standards are established for healthcare [Ethical_ai_healthcare_review.pdf]. Moreover, bias mitigation techniques are critical for ensuring fairness in clinical decision support systems (CDSS) [Ethical_ai_healthcare_review.pdf].\n\n**Challenges and Limitations of Implementing Predictive Analytics in Healthcare**\n\nDespite its benefits, predictive analytics faces several challenges and limitations. One of the primary concerns is the lack of a universally agreed definition of AI, which can lead to confusion and inconsistencies in its application [Artificial-Intelligence-AI-in-healthcare-and-research-1.pdf]. Additionally, there is a need for value-flexibility in healthcare innovations, ensuring that they are accessible and equitable for all patients [Ethics_of_artificial_intelligence_in_medicine.pdf]. Furthermore, an ethical framework is essential to ensure accountability and address biases in AI algorithms, promoting fairness in healthcare outcomes [WJM-14-94071.pdf].\n\n**Futures Directions: Emerging Trends and Opportunities**\n\nAs predictive analytics continues to evolve, emerging trends and opportunities are presenting themselves. For instance, the integration of artificial intelligence (AI) and machine learning (ML) is enabling the development of more sophisticated predictive models. According to [Emerging Technologies in Healthcare and Medicine Seitzinger P.], AI and ML have the potential to improve healthcare outcomes by automating tasks, reducing errors, and enhancing patient care.\n\nIn conclusion, predictive analytics has the potential to transform the healthcare industry, but it is crucial to address the challenges and limitations associated with its implementation. By establishing regulatory standards, ensuring fairness in CDSS, and developing an ethical framework, we can ensure that predictive analytics benefits both patients and healthcare providers alike.'], 'verification_passed': False, 'verification_reason': 'Missing section: Introduction to Predictive Analytics in Healthcare', 'min_words_per_section': 80, 'needs_verification': False}
+
+
+
+
+Test 3 - prompt "AI ethics"
+--------------------------------------------------------------
+
+
