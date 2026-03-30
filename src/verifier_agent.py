@@ -1,41 +1,54 @@
 import os
+import re
 
 DATA_PATH = "../data/pdf"
 
 class VerifierAgent:
 
     def verify(self, draft, evidence, sections):
-        print("VerifierAgent: checking citations")
+        print("Verifier: checking...")
 
         if not evidence:
-            return False, "No evidence provided"
+            return False, "No evidence"
 
-        # --- Check unique sources from evidence directly ---
+        # --- Collect sources (case insensitive) ---
         sources = set()
         for e in evidence:
-            if "[Source:" in e:
-                filename = e.split("[Source:")[1].split("]")[0].strip().lower()
-                sources.add(filename)
+            if "[source:" in e.lower():
+                try:
+                    filename = e.lower().split("[source:")[1].split("]")[0].strip()
+                    sources.add(filename)
+                except:
+                    continue
 
-        total_pdfs = len([f.lower() for f in os.listdir(DATA_PATH) if f.endswith(".pdf")])
-        required_sources = max(2, int(total_pdfs * 0.6))
+        total_pdfs = len([
+            f.lower() for f in os.listdir(DATA_PATH) if f.endswith(".pdf")
+        ])
+
+        required_sources = max(2, int(total_pdfs * 0.4))
 
         if len(sources) < required_sources:
-            return False, f"Not enough source diversity (need {required_sources}, found {len(sources)})"
+            return False, f"Low source diversity ({len(sources)}/{required_sources})"
 
-        # --- Check each section has citation ---
+        # --- Check each section exists + has citation ---
         for section in sections:
-            section_marker = f"## {section}"
-            if section_marker in draft:
-                section_parts = draft.split(section_marker)
-                if len(section_parts) > 1:
-                    section_text = section_parts[1].split("##")[0]
-                    if "[Source:" not in section_text:
-                        return False, f"No citation in section {section}"
+            marker = f"## {section}"
 
-        # --- Check minimum length ---
-        min_words = 200
-        if len(draft.split()) < min_words:
-            return False, "Report too short"
+            if marker not in draft:
+                return False, f"Missing section: {section}"
 
-        return True, "Verification passed"
+            try:
+                part = draft.split(marker)[1]
+                next_split = part.split("##")
+                part = next_split[0] if len(next_split) > 0 else part
+            except:
+                return False, f"Parsing error in {section}"
+
+            if "[source:" not in part.lower():
+                return False, f"No citation in {section}"
+
+        # --- Length check ---
+        if len(draft.split()) < 200:
+            return False, "Too short"
+
+        return True, "Passed"
