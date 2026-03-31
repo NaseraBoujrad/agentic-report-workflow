@@ -34,40 +34,31 @@ Available actions:
 plan, retrieve, generate, verify, reflect, finish
 
 Guidelines:
-- If no plan → plan
+- If no plan → you MUST choose plan FIRST
 - If plan exists and no evidence → retrieve
 - If evidence exists and no draft → generate
-- If draft exists and not verified → verify
-- If verification has failed → reflect
-- If verification fails → you MUST reflect
-- If verification_passed is True → finish
+- If draft exists → verify
+- If verification fails → reflect
+- If verification passed → finish
 
 IMPORTANT:
-- Do NOT repeat actions that don't change the state
+- Avoid repeating the same action if it does not change the state
 - Always move the workflow forward
-- If plan already exists → DO NOT choose "plan"
-- If draft is None → DO NOT choose "verify"
-- Avoid unnecessary repeated retrieval
-- If evidence exists AND draft is None → DO NOT choose retrieve again
-- If retrieval does not improve results → choose generate instead
-- If evidence exists and draft is None → you MUST choose generate
-- Do NOT repeat reflect if no new information is added
-- After reflection, you MUST choose a corrective action (generate or retrieve)
+- Use reflection to improve the next step
 
-CRITICAL RULES:
-- If evidence is empty → you MUST choose retrieve
-- You are NOT allowed to generate without evidence
-- Generating without evidence is a critical failure
+- If no plan → you MUST choose plan FIRST
+- You are NOT allowed to generate without a plan
+- Generating without a plan is a FAILURE
 
-- After you choose "generate", you MUST choose "verify" in the next iteration
-- You are NOT allowed to generate multiple times in a row
-- If verification fails → you MUST choose reflect before any other action
-- Generating multiple times without verification is a failure
+- If draft does NOT exist → you MUST choose generate
+- You are NOT allowed to choose verify without a draft
+- Choosing verify without a draft is a FAILURE
 
-STATE PRIORITY:
-- Plan is completed once it exists
-- You MUST NOT choose plan again if it already exists
-- Choosing plan again is a BAD decision
+- If verification_passed is True → you MUST choose finish
+- Continuing after verification success is a FAILURE
+
+- If plan already exists → you MUST NOT choose plan again
+- Repeating the same action multiple times is a FAILURE
 
 Return ONLY JSON:
 {{"action": "...", "reason": "..."}}
@@ -302,7 +293,8 @@ def run_agent(prompt):
         "draft_history": [],
         "verification_passed": False,
         "verification_reason": None,
-        "reflection": None
+        "reflection": None,
+        "last_action": None
     }
 
     verifier = VerifierAgent()
@@ -313,32 +305,109 @@ def run_agent(prompt):
         state["iteration"] += 1
         print(f"\n--- Iteration {state['iteration']} ---")
 
+        # 🔴 STOP + FINAL VERIFY
+        if state["iteration"] >= MAX_ITERATIONS:
+            print("⚠️ Max iterations reached")
+
+            if state["draft"] is not None and not state["verification_passed"]:
+                print("⚠️ Forcing final verification before stopping")
+                verify(state, verifier)
+
+            break
+
+        # =========================
+        # POLICY
+        # =========================
         decision = policy(state)
         action = decision.get("action")
 
+        # =========================
+        # 🔥 FIX 1: STOP PLAN LOOP
+        # =========================
+        if action == "plan" and state["plan"] is not None:
+            print("⚠️ Plan already exists → forcing next logical step")
+
+            if len(state["evidence"]) == 0:
+                action = "retrieve"
+            elif state["draft"] is None:
+                action = "generate"
+            else:
+                action = "verify"
+
+        # =========================
+        # 🔥 FIX 2: VERIFY FAIL → REFLECT
+        # =========================
+        if action == "verify" and state["verification_passed"] is False and state["verification_reason"] is not None:
+            print("⚠️ Verification already failed → forcing reflect")
+            action = "reflect"
+
+        # =========================
+        # 🔥 GUARD: INVALID ACTION
+        # =========================
         if action not in ["plan", "retrieve", "generate", "verify", "reflect", "finish"]:
             print("⚠️ Invalid action → fallback plan")
             action = "plan"
 
         print("Agent action:", action)
-        
-        #  STOPPA PLAN-LOOP
-        #if action == "plan" and state["plan"] is not None:
-            #print("⚠️ Plan already exists → forcing reflect")
-           # action = "reflect"
-            
-        #  NYTT: reflect styr nästa steg
+
+        # =========================
+        # 🔥 FIX: VERIFY UTAN DRAFT
+        # =========================
+        if action == "verify" and state["draft"] is None:
+            print("⚠️ No draft → forcing generate")
+            action = "generate"
+
+        # =========================
+        # 🔥 FIX 3: STOP REPEAT LOOP
+        # =========================
+        if state.get("last_action") == action and action in ["retrieve", "generate"]:
+            print("⚠️ Same action repeated → forcing reflect")
+            action = "reflect"
+
+        # =========================
+        # REFLECT BLOCK
+        # =========================
         if action == "reflect":
             reflect(state)
-            continue
+
+            decision = policy(state)
+            action = decision.get("action")
+
+            # 🔥 FIX: STOP REFLECT LOOP
+            if action == "reflect":
+                print("⚠️ Reflect loop → forcing generate")
+                action = "generate"
 
             print("New action after reflection:", action)
 
+        # =========================
+        # FINISH
+        # =========================
         if action == "finish":
             break
 
+        # =========================
+        # EXECUTE
+        # =========================
         execute(action, state, verifier)
 
+        # =========================
+        # 🔥 FIX 4: FORCE VERIFY AFTER GENERATE
+        # =========================
+        if action == "generate":
+            print("⚠️ Enforcing verify after generate")
+            verify(state, verifier)
+            state["last_action"] = "verify"
+            continue
+
+        # =========================
+        # UPDATE LAST ACTION
+        # =========================
+        state["last_action"] = action
+
+    # =========================
+    # RESULT
+    # =========================
     if state["verification_passed"]:
         print("\n✅ SUCCESS\n")
         print(state["draft"])
@@ -346,7 +415,6 @@ def run_agent(prompt):
         print("\n❌ FAILED")
 
     return state
-
 
 # =========================
 # MAIN
