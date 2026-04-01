@@ -349,6 +349,9 @@ def run_agent(prompt):
             action = "plan"
 
         print("Agent action:", action)
+        
+        with open("log.txt", "a") as f:
+            f.write(f"{state['iteration']} | {action} | evidence={len(state['evidence'])}\n")
 
         # =========================
         # 🔥 FIX: VERIFY UTAN DRAFT
@@ -417,11 +420,82 @@ def run_agent(prompt):
     return state
 
 # =========================
+# BASELINE (no agent, no tools)
+# =========================
+def baseline(prompt):
+    print("\n--- BASELINE RUN ---\n")
+
+    response = llm.invoke(f"""
+Write a structured academic report about: {prompt}.
+
+Use 3–4 sections with headings.
+
+Include citations if possible.
+""")
+
+    output = response.content
+
+    print(output)
+
+    return output
+# =========================
+# EVALUATION
+# =========================
+def evaluate():
+    prompts = [
+        "AI healthcare",
+        "AI ethics in medicine",
+        "Machine learning in diagnosis"
+    ]
+
+    agent_success = 0
+    baseline_success = 0
+
+    print("\n====================")
+    print("RUNNING EVALUATION")
+    print("====================\n")
+
+    for p in prompts:
+        print(f"\n### PROMPT: {p}\n")
+
+        # --- Agent ---
+        state = run_agent(p)
+
+        if state["verification_passed"]:
+            agent_success += 1
+
+        # --- Baseline ---
+        baseline_output = baseline(p)
+
+        if "[Source:" in baseline_output:
+            baseline_success += 1
+
+    print("\n====================")
+    print("RESULTS")
+    print("====================")
+
+    print(f"Agent success rate: {agent_success}/{len(prompts)}")
+    print(f"Baseline (simple citation check): {baseline_success}/{len(prompts)}")
+    
+# =========================
 # MAIN
 # =========================
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--prompt", type=str, required=True)
+    parser.add_argument("--prompt", type=str)
+    parser.add_argument("--eval", action="store_true")
     args = parser.parse_args()
 
-    run_agent(args.prompt)
+    if args.eval:
+        evaluate()
+    else:
+        run_agent(args.prompt)
+
+
+
+#if __name__ == "__main__":
+    #parser = argparse.ArgumentParser()
+    #parser.add_argument("--prompt", type=str, required=True)
+    #args = parser.parse_args()
+
+    #run_agent(args.prompt)
