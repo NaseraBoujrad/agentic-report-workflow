@@ -34,7 +34,7 @@ Available actions:
 plan, retrieve, generate, verify, reflect, finish
 
 Guidelines:
-- If no plan → you MUST choose plan FIRST
+- If no plan you → MUST choose plan FIRST
 - If plan exists and no evidence → retrieve
 - If evidence exists and no draft → generate
 - If draft exists → verify
@@ -46,11 +46,11 @@ IMPORTANT:
 - Always move the workflow forward
 - Use reflection to improve the next step
 
-- If no plan → you MUST choose plan FIRST
+- If no plan you → MUST choose plan FIRST
 - You are NOT allowed to generate without a plan
 - Generating without a plan is a FAILURE
 
-- If draft does NOT exist → you MUST choose generate
+- If draft does NOT exist you → MUST choose generate
 - You are NOT allowed to choose verify without a draft
 - Choosing verify without a draft is a FAILURE
 
@@ -74,7 +74,7 @@ Return ONLY JSON:
     except:
         pass
 
-    print("⚠️ Policy failed → fallback")
+    print("Policy failed → fallback")
     return {"action": "plan"}
 
 
@@ -105,7 +105,7 @@ def execute(action, state, verifier):
 def plan(state):
     #  STOPPA loop
     if state["plan"] is not None:
-        print("⚠️ Plan already exists → skipping")
+        print("Plan already exists, skipping planning")
         return
 
     print("Planning...")
@@ -150,7 +150,7 @@ def retrieve(state):
     all_results = []
 
     if state["plan"] is None:
-        print("⚠️ No plan available")
+        print("No plan available")
         return
 
     for section in state["plan"]["sections"]:
@@ -237,7 +237,7 @@ Use this evidence:
 # =========================
 def verify(state, verifier):
     if state["draft"] is None:
-        print("⚠️ No draft → skipping verify")
+        print("No draft → skipping verify")
         state["verification_passed"] = False
         state["verification_reason"] = "No draft"
         return
@@ -305,12 +305,12 @@ def run_agent(prompt):
         state["iteration"] += 1
         print(f"\n--- Iteration {state['iteration']} ---")
 
-        # 🔴 STOP + FINAL VERIFY
+        # STOP + FINAL VERIFY
         if state["iteration"] >= MAX_ITERATIONS:
-            print("⚠️ Max iterations reached")
+            print("Max iterations reached")
 
             if state["draft"] is not None and not state["verification_passed"]:
-                print("⚠️ Forcing final verification before stopping")
+                print("Forcing final verification before stopping")
                 verify(state, verifier)
 
             break
@@ -322,10 +322,10 @@ def run_agent(prompt):
         action = decision.get("action")
 
         # =========================
-        # 🔥 FIX 1: STOP PLAN LOOP
+        #  FIX 1: STOP PLAN LOOP
         # =========================
         if action == "plan" and state["plan"] is not None:
-            print("⚠️ Plan already exists → forcing next logical step")
+            print("Plan already exists → forcing next logical step")
 
             if len(state["evidence"]) == 0:
                 action = "retrieve"
@@ -335,17 +335,17 @@ def run_agent(prompt):
                 action = "verify"
 
         # =========================
-        # 🔥 FIX 2: VERIFY FAIL → REFLECT
+        #  FIX 2: VERIFY FAIL → REFLECT
         # =========================
         if action == "verify" and state["verification_passed"] is False and state["verification_reason"] is not None:
-            print("⚠️ Verification already failed → forcing reflect")
+            print("Verification already failed → forcing reflect")
             action = "reflect"
 
         # =========================
-        # 🔥 GUARD: INVALID ACTION
+        #  GUARD: INVALID ACTION
         # =========================
         if action not in ["plan", "retrieve", "generate", "verify", "reflect", "finish"]:
-            print("⚠️ Invalid action → fallback plan")
+            print("Invalid action → fallback plan")
             action = "plan"
 
         print("Agent action:", action)
@@ -354,17 +354,17 @@ def run_agent(prompt):
             f.write(f"{state['iteration']} | {action} | evidence={len(state['evidence'])}\n")
 
         # =========================
-        # 🔥 FIX: VERIFY UTAN DRAFT
+        #  FIX: VERIFY UTAN DRAFT
         # =========================
         if action == "verify" and state["draft"] is None:
-            print("⚠️ No draft → forcing generate")
+            print("No draft → forcing generate")
             action = "generate"
 
         # =========================
-        # 🔥 FIX 3: STOP REPEAT LOOP
+        #  FIX 3: STOP REPEAT LOOP
         # =========================
         if state.get("last_action") == action and action in ["retrieve", "generate"]:
-            print("⚠️ Same action repeated → forcing reflect")
+            print("Same action repeated → forcing reflect")
             action = "reflect"
 
         # =========================
@@ -376,9 +376,9 @@ def run_agent(prompt):
             decision = policy(state)
             action = decision.get("action")
 
-            # 🔥 FIX: STOP REFLECT LOOP
+            #  FIX: STOP REFLECT LOOP
             if action == "reflect":
-                print("⚠️ Reflect loop → forcing generate")
+                print("Reflect loop → forcing generate")
                 action = "generate"
 
             print("New action after reflection:", action)
@@ -395,10 +395,10 @@ def run_agent(prompt):
         execute(action, state, verifier)
 
         # =========================
-        # 🔥 FIX 4: FORCE VERIFY AFTER GENERATE
+        #  FIX 4: FORCE VERIFY AFTER GENERATE
         # =========================
         if action == "generate":
-            print("⚠️ Enforcing verify after generate")
+            print("Enforcing verify after generate")
             verify(state, verifier)
             state["last_action"] = "verify"
             continue
@@ -412,7 +412,7 @@ def run_agent(prompt):
     # RESULT
     # =========================
     if state["verification_passed"]:
-        print("\n✅ SUCCESS\n")
+        print("\n SUCCESS\n")
         print(state["draft"])
     else:
         print("\n❌ FAILED")
@@ -492,10 +492,4 @@ if __name__ == "__main__":
         run_agent(args.prompt)
 
 
-
-#if __name__ == "__main__":
-    #parser = argparse.ArgumentParser()
-    #parser.add_argument("--prompt", type=str, required=True)
-    #args = parser.parse_args()
-
-    #run_agent(args.prompt)
+#required=True
