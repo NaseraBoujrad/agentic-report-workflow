@@ -13,6 +13,7 @@ The system uses iterative planning, tool calls, validation, and recovery to ensu
 - Python 3.13.5+
 - PyPdf
 - PyTesseract
+- Ollama & llama3
 
 ## Usage
 
