@@ -2,7 +2,7 @@
 Agentic workflow system that generates and verifies document based reports using iterative planning, tool use, and validation.
 # Overview
 A simple Python project that generates reports on a given topic using PDF sources. 
-Supports two modes: **baseline** (direct evidence retrieval) and **agent** (structured, verified draft generation).
+Supports two modes: **Agent** (structured, verified draft generation) and **Eval** (evaluate agent vs direct evidence retrieval).
 
 This project implements an agentic workflow that generates structured reports from local documents. 
 The system uses iterative planning, tool calls, validation, and recovery to ensure that all citations in the report are grounded in source documents.
@@ -18,11 +18,11 @@ The system uses iterative planning, tool calls, validation, and recovery to ensu
 
 Run the agent or baseline mode with a prompt:
 
-## Baseline mode
-python src/agent_runner.py --prompt "AI healthcare ethics" --mode baseline
-
 ## Agent mode
-python src/agent_runner.py --prompt "AI healthcare ethics" --mode agent
+python src/agent_runner.py --prompt "AI healthcare ethics"
+
+## Evaluation mode
+python src/agent_runner.py --eval
 
 
 
@@ -67,7 +67,7 @@ The agent can:
 
 # Environment Dynamics
 
-- Each tool call updates the internal state:
+- Each tool call updates the internal state
 
 - Retrieval updates the evidence pool
 
