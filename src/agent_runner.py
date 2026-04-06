@@ -335,14 +335,14 @@ def run_agent(prompt):
                 action = "verify"
 
         # =========================
-        #  FIX 2: VERIFY FAIL → REFLECT
+        #  VERIFY FAIL → REFLECT
         # =========================
         if action == "verify" and state["verification_passed"] is False and state["verification_reason"] is not None:
             print("Verification already failed → forcing reflect")
             action = "reflect"
 
         # =========================
-        #  GUARD: INVALID ACTION
+        #  GUARD FOR INVALID ACTION
         # =========================
         if action not in ["plan", "retrieve", "generate", "verify", "reflect", "finish"]:
             print("Invalid action → fallback plan")
@@ -354,14 +354,14 @@ def run_agent(prompt):
             f.write(f"{state['iteration']} | {action} | evidence={len(state['evidence'])}\n")
 
         # =========================
-        #  FIX: VERIFY UTAN DRAFT
+        #  VERIFY WITHOUT DRAFT
         # =========================
         if action == "verify" and state["draft"] is None:
             print("No draft → forcing generate")
             action = "generate"
 
         # =========================
-        #  FIX 3: STOP REPEAT LOOP
+        #  STOP REPEAT LOOP
         # =========================
         if state.get("last_action") == action and action in ["retrieve", "generate"]:
             print("Same action repeated → forcing reflect")
@@ -376,7 +376,9 @@ def run_agent(prompt):
             decision = policy(state)
             action = decision.get("action")
 
-            #  FIX: STOP REFLECT LOOP
+            # =========================
+            # STOP REFLECT LOOP
+            # =========================
             if action == "reflect":
                 print("Reflect loop → forcing generate")
                 action = "generate"
@@ -395,7 +397,7 @@ def run_agent(prompt):
         execute(action, state, verifier)
 
         # =========================
-        #  FIX 4: FORCE VERIFY AFTER GENERATE
+        #  FORCE VERIFY AFTER GENERATE
         # =========================
         if action == "generate":
             print("Enforcing verify after generate")
@@ -415,7 +417,7 @@ def run_agent(prompt):
         print("\n SUCCESS\n")
         print(state["draft"])
     else:
-        print("\n❌ FAILED")
+        print("\n FAILED")
 
     return state
 
